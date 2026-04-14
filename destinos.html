@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinos - Explora Jujuy</title>
+    <link rel="stylesheet" href="css\styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo"><h1>Explora Jujuy</h1></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="#">Explorar ▼</a>
+                    <div class="mega-menu">
+                        <a href="destinos.html">Destinos</a>
+                        <a href="agencias.html">Agencias</a>
+                        <a href="precios.html">Precios</a>
+                    </div>
+                </li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="blog de destinos.html">Blog de Destinos</a></li>
+                <li><button onclick="document.body.classList.toggle('dark-mode')">🌙/☀️</button></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main class="destinos-page">
+        <h2 style="text-align: center; margin: 30px 0;">Nuestros Destinos</h2>
+
+        <div class="filtros">
+            <input type="radio" name="filtro" id="todos" checked>
+            <label for="todos">Todos</label>
+
+            <input type="radio" name="filtro" id="naturaleza">
+            <label for="naturaleza">Naturaleza</label>
+
+            <input type="radio" name="filtro" id="cultural">
+            <label for="cultural">Cultural</label>
+
+            <input type="radio" name="filtro" id="solyarena">
+            <label for="solyarena">Sol y Arena</label>
+            
+            <div class="galeria-masonry">
+                <div class="item naturaleza">
+                    <img src="img\salinas grandes.avif" alt="Salinas-Grandes">
+                    <div class="overlay"><span>Salinas Grandes</span></div>
+                </div>
+                <div class="item naturaleza">
+                    <img src="img\serranias del hornocal.jpg" alt="Cerro">
+                    <div class="overlay"><span>Serranías del Hornocal</span></div>
+                </div>
+                <div class="item cultural">
+                    <img src="img\desentierro carnaval.jpg" alt="Carnaval">
+                    <div class="overlay"><span>Desentierro del Diablo</span></div>
+                </div>
+                <div class="item cultural">
+                    <img src="img\huamhuaca para destinos.jpg" alt="Humahuaca">
+                    <div class="overlay"><span>Humahuaca</span></div>
+                </div>
+                <div class="item cultural">
+                    <img src="img\purmamarca para destinos.jpg" alt="Purmamarca">
+                    <div class="overlay"><span>Purmamarca</span></div>
+                </div>
+                <div class="item solyarena">
+                    <img src="img\huancar para destinos.jpg" alt="El Huancar">
+                    <div class="overlay"><span>El Huancar</span></div>
+                </div>
+                <div class="item solyarena">
+                    <img src="img\Dique del carmen para destinos.jpg" alt="Dique La Cienega">
+                    <div class="overlay"><span>Dique La Cienega</span></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+    <section class="seccion-precios" style="padding: 50px 10%;">
+    <h2 style="text-align: center; margin-bottom: 30px;">Tarifas y Temporadas</h2>
+    <div class="contenedor-tabla">
+        <table class="tabla-responsiva">
+            <thead>
+                <tr>
+                    <th>Destino</th>
+                    <th>Categoría</th>
+                    <th>Temporada Alta</th>
+                    <th>Temporada Baja</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Destino">Serranieas del Hornocal</td>
+                    <td data-label="Categoría">Naturaleza</td>
+                    <td>$45.000</td>
+                    <td>$30.000</td>
+                </tr>
+                <tr>
+                    <td data-label="Destino">Salinas Grandes</td>
+                    <td data-label="Categoría">Naturaleza</td>
+                    <td>$55.000</td>
+                    <td>$40.000</td>
+                </tr>
+                <tr>
+                    <td data-label="Destino">Desentierro del Carnaval en Uquia</td>
+                    <td data-label="Categoría">Cultural</td>
+                    <td>$43.000</td>
+                    <td>$22.000</td>
+                </tr>
+                <tr>
+                    <td data-label="Destino">Humahuaca</td>
+                    <td data-label="Categoría">Cultural</td>
+                    <td>$40.000</td>
+                    <td>$25.000</td>
+                </tr>
+                <tr>
+                    <td data-label="Destino">Purmamarca</td>
+                    <td data-label="Categoría">Cultural</td>
+                    <td>$38.000</td>
+                    <td>$27.000</td>
+                </tr>
+                <tr>
+                    <td data-label="Destino">El Huancar</td>
+                    <td data-label="Categoría">Sol y Arena</td>
+                    <td>$60.000</td>
+                    <td>$48.000</td>
+                </tr>
+                <tr>
+                    <td data-label="Destino">Dique La Cienega</td>
+                    <td data-label="Categoría">Sol y Arena</td>
+                    <td>$25.000</td>
+                    <td>$22.000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </section>
+
+
+<footer style="background-color: var(--footer-bg); color: var(--footer-text); padding: 40px 10%; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 50px; transition: var(--transition);">
+    <div>
+        <h3 style="color: var(--footer-text);">Explora Jujuy</h3>
+        <p>Tu guía de viaje en el Norte.</p>
+    </div>
+    <div>
+        <h3 style="color: var(--footer-text);">Suscríbete</h3>
+        <form style="display: flex; gap: 5px;">
+            <input type="email" placeholder="Tu email" style="padding: 8px; border-radius: 4px; border: none;">
+            <button type="submit" style="background: var(--secondary); color: white; border: none; padding: 8px; cursor: pointer;">OK</button>
+        </form>
+    </div>
+    <div>
+        <h3 style="color: var(--footer-text);">Redes Sociales</h3>
+        <p>Instagram | Facebook</p>
+    </div>
+    <div>
+        <h3 style="color: var(--footer-text);">Ubicación</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116346.70321591741!2d-65.364753!3d-24.183350!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x940d796796695679%3A0xc6651917b2b62283!2sSan%20Salvador%20de%20Jujuy%2C%20Jujuy!5e0!3m2!1ses-419!2sar!4v1713000000000!5m2!1ses-419!2sar" width="100%" height="100" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</footer>
+
+</body>
+</html>

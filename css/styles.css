@@ -1,0 +1,805 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+:root {
+    --header-bg: #4b4b4b; /* Color normal del header */
+    --footer-bg: #444444;    /* Color de fondo del footer */
+    --footer-text: #ffffff;  /* Color de letra del footer */
+    --primary: #2a9d8f;
+    --secondary: #e76f51;
+    --dark: #264653;
+    --white: #ffffff;
+    --text: #264653;
+    --transition: all 0.3s ease;
+}
+/*ESTILOS PARA EL INDEX.HTML*/
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--white);
+    color: var(--text);
+}
+
+/* Cuando se activa la clase dark-mode */
+body.dark-mode {
+    --header-bg: #000000; /* Color del header en modo oscuro */
+    --footer-bg: #000000;    /* Color de fondo del footer en MODO OSCURO */
+    --footer-text: #ffffff;  /* Color de letra del footer en MODO OSCURO (ejemplo verde) */
+    --white: #121212; /* Fondo general */
+    --text: #e0e0e0;  /* Texto claro */
+    --bg-card: #1e1e1e; /* Fondo de tarjetas */
+    background-color: var(--white);
+}
+
+
+/* Header estilizado */
+header {
+    background: var(--header-bg);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 { color: white; margin: 0; font-size: 1.5rem; }
+
+nav ul { display: flex; list-style: none; gap: 20px; margin: 0; }
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+    transition: var(--transition);
+}
+
+nav a:hover { color: var(--secondary); }
+
+/* Mega Menú */
+.mega-menu {
+    display: none;
+    position: absolute;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+li:hover .mega-menu { display: block; }
+.mega-menu a { color: var(--dark); display: block; padding: 5px 0; }
+
+/* Hero Section */
+.hero {
+    height: 80vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-overlay {
+    background: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Cards de Destinos */
+.contenedor-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 50px 10%;
+}
+
+.card {
+    background: var(--bg-card);
+    color: var(--text);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: var(--transition);
+}
+
+.card:hover { transform: translateY(-10px); }
+
+.card img { width: 100%; height: 200px; object-fit: cover; }
+
+.card-info { padding: 20px; }
+
+/* Footer Requisito TP */
+footer {
+    background: var(--dark);
+    color: white;
+    padding: 50px 10%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.newsletter input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    width: 70%;
+}
+
+.newsletter button {
+    padding: 10px;
+    background: var(--secondary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/*ESTILOS PARA EL INDEX.HTML*/
+
+
+/*/////////////////////////////////////////////*/
+
+
+/*ESTILOS PARA LA GALERIA Y LOS FILTROS*/
+
+/* Filtros CSS-Only */
+.filtros {
+    text-align: center;
+    padding: 20px;
+}
+
+.filtros input[type="radio"] {
+    display: none; /* Escondemos los botoncitos redondos */
+}
+
+.filtros label {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--dark);
+    color: white;
+    cursor: pointer;
+    border-radius: 20px;
+    margin: 5px;
+    transition: var(--transition);
+}
+
+/* Galería Masonry con Grid */
+.galeria-masonry {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: 10px; /* Base para el efecto masonry */
+    gap: 20px;
+    padding: 40px 10%;
+}
+
+.item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    grid-row-end: span 25; /* Altura base */
+}
+
+/* Ajustes de altura para efecto Masonry */
+.item:nth-child(2n) { grid-row-end: span 35; }
+.item:nth-child(3n) { grid-row-end: span 45; }
+
+.item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Overlay al pasar el cursor (Requisito TP) */
+.item .overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(42, 157, 143, 0.8);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.item:hover .overlay { opacity: 1; }
+.item:hover img { transform: scale(1.1); }
+
+/* Lógica de filtrado */
+#naturaleza:checked ~ .galeria-masonry .item:not(.naturaleza),
+#cultural:checked ~ .galeria-masonry .item:not(.cultural),
+#solyarena:checked ~ .galeria-masonry .item:not(.solyarena) {
+    display: none;
+}
+
+/*DISEÑO RESPONSIVO*/
+
+/* Estilos Base de la Tabla */
+.contenedor-tabla {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.tabla-responsiva {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    color: var(--text);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tabla-responsiva th, .tabla-responsiva td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-responsiva th {
+    background-color: var(--dark);
+    color: white;
+}
+
+/* Efecto de resaltado al pasar el cursor */
+.tabla-responsiva tbody tr:hover {
+    background-color: rgba(42, 157, 143, 0.2);
+    transition: var(--transition);
+}
+
+/* Diseño Responsivo para Móviles */
+@media screen and (max-width: 600px) {
+    .tabla-responsiva thead {
+        display: none; /* Escondemos el encabezado en celulares */
+    }
+
+    .tabla-responsiva tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid var(--primary);
+    }
+
+    .tabla-responsiva td {
+        display: block;
+        text-align: right;
+        font-size: 14px;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    /* Usamos el atributo data-label para mostrar el título en móvil */
+    .tabla-responsiva td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        text-align: left;
+        font-weight: bold;
+        color: var(--primary);
+    }
+}
+
+/*ESTILOS PARA LA GALERIA Y LOS FILTROS*/
+
+
+/*/////////////////////////////////////////////*/
+
+
+/*ESTILOS PARA EL EFECTO FLIP*/
+
+/* Contenedor principal de la tarjeta */
+.flip-card {
+    background-color: transparent;
+    width: 300px;
+    height: 380px;
+    perspective: 1000px; /* Efecto 3D profundo */
+}
+
+/* El elemento que realmente gira */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Giro al pasar el mouse */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.flip-card-front {
+    background-color: var(--bg-card);
+    color: var(--text);
+}
+
+.flip-card-front img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.flip-card-back {
+    background-color: var(--primary);
+    color: white;
+    transform: rotateY(180deg); /* Ya empieza rotada */
+}
+
+/* Rating Animado  */
+.rating {
+    color: #ffd700;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    animation: pulseRating 2s infinite;
+}
+
+@keyframes pulseRating {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/*ESTILOS PARA EL EFECTO FLIP*/
+
+
+/*/////////////////////////////////////////////*/
+
+
+/*VALIDACION EN TIEMPO REAL CON SELECTORES :valid y :invalid*/
+
+/* --- ESTILOS EXCLUSIVOS PARA CONTACTO.HTML --- */
+
+/* Contenedor con Grid para centrar todo */
+.contacto-container {
+    display: grid;
+    gap: 2rem;
+    padding: 60px 10%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Formulario usando Flexbox  */
+.contacto-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    flex: 1 1 calc(50% - 20px); /* Dos columnas */
+    display: flex;
+    flex-direction: column;
+}
+
+.full-width { flex: 1 1 100%; } /* El mensaje ocupa todo el ancho */
+
+.form-group label { margin-bottom: 8px; font-weight: bold; }
+
+.form-group input, .form-group textarea {
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--text);
+    transition: var(--transition);
+}
+
+/* Validación en tiempo real  */
+.form-group input:focus:invalid, 
+.form-group textarea:focus:invalid {
+    border-color: #e76f51; /* Rojo error */
+}
+
+.form-group input:focus:valid, 
+.form-group textarea:focus:valid {
+    border-color: #2a9d8f; /* Verde éxito */
+}
+
+/* Botón y Spinner  */
+.btn-submit {
+    background: var(--dark);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top: 3px solid #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-left: 15px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Modal */
+/* Superposición del Modal */
+.modal-overlay {
+    display: none; /* Se activa con JS */
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Fondo más oscuro para resaltar el cuadro */
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Caja del Modal */
+.modal-box {
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Icono de éxito */
+.modal-icon {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+/* Título (Color principal para que resalte) */
+.modal-title {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+/* Texto descriptivo (Aseguramos contraste) */
+.modal-text {
+    color: var(--text); /* Usa la variable de texto que cambia en modo oscuro */
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+/* El botón "Entendido" mejorado */
+.btn-modal {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 30px; /* Forma de píldora */
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(42, 157, 143, 0.3);
+}
+
+.btn-modal:hover {
+    background: var(--dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/*VALIDACION EN TIEMPO REAL CON SELECTORES :valid y :invalid*/
+
+
+/*/////////////////////////////////////////////*/
+
+
+/*ESTILOS PARA LA PAGINA PRECIO*/
+
+/* --- PAGINA DE PRECIOS --- */
+
+.tabla-comparativa {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.tabla-comparativa th, .tabla-comparativa td {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.tabla-comparativa th {
+    background: var(--dark);
+    color: white;
+}
+
+.fila-precio {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+/* LÓGICA DE TOOLTIPS  */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted var(--primary);
+    cursor: help;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--dark);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Aparece arriba del texto */
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.8rem;
+    font-weight: normal;
+}
+
+/* Mostrar el tooltip al pasar el mouse */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Efecto de resaltado en las filas de la tabla */
+/* Efecto de resaltado SUAVE en las filas */
+.tabla-comparativa tbody tr {
+    /* prepara a la fila para cualquier cambio */
+    transition: background-color 0.4s ease, transform 0.2s ease;
+}
+
+.tabla-comparativa tbody tr:hover {
+    background-color: rgba(42, 157, 143, 0.15); /* Color verde clarito */
+    /* Opcional: un pequeñísimo movimiento para que se note más el cursor */
+    transform: scale(1.01); 
+}
+
+/* También para el modo oscuro, que sea igual de suave */
+body.dark-mode .tabla-comparativa tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/*ESTILOS PARA LA PAGINA PRECIO*/
+
+
+/*/////////////////////////////////////////////*/
+
+
+/*ESTILOS PARA LA PAGINA BLOG DE DESTINOS*/
+
+/* =========================================
+   --- SECCIÓN BLOG: ESTILO REVISTA ---
+   ========================================= */
+
+.blog-container {
+    padding: 60px 10%;
+    max-width: 900px; /* Centra el contenido para que no sea infinito a los lados */
+    margin: 0 auto;
+}
+
+.blog-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: var(--text);
+}
+
+
+
+.blog-filters input[type="radio"] {
+    display: none; /* Escondemos el radio button */
+}
+
+.blog-filters label {
+    padding: 10px 25px;
+    background: #e0e0e0;
+    color: #333;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* Cambio de color al estar seleccionado */
+.blog-filters input[type="radio"]:checked + label {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(42, 157, 143, 0.3);
+}
+
+/* Escondemos los circulitos de radio */
+.blog-wrapper input[type="radio"] {
+    display: none;
+}
+
+/* LÓGICA DE FILTRADO */
+/* Si "Aventura" está marcado, escondemos todo lo que NO sea aventura */
+#tag-aventura:checked ~ .newspaper-grid .post:not(.aventura) {
+    display: none;
+}
+
+/* Si "Historia" está marcado, escondemos todo lo que NO sea historia */
+#tag-historia:checked ~ .newspaper-grid .post:not(.historia) {
+    display: none;
+}
+
+/* --- Estilo de los Botones --- */
+.blog-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.blog-filters label {
+    padding: 10px 20px;
+    background: #eee;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Color cuando están seleccionados */
+#tag-todos:checked ~ .blog-filters label[for="tag-todos"],
+#tag-aventura:checked ~ .blog-filters label[for="tag-aventura"],
+#tag-historia:checked ~ .blog-filters label[for="tag-historia"] {
+    background: var(--primary);
+    color: white;
+}
+/* --- 2. GRID DE UNA COLUMNA --- */
+.newspaper-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Una columna para que sea uno abajo del otro */
+    gap: 50px;
+}
+
+.post {
+    background: var(--bg-card);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    padding-bottom: 25px;
+    /* Inicio del Scroll Reveal (invisible) */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+/* Clase que activa el JS al hacer scroll */
+.post.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.post-img {
+    width: 100%;
+    height: 350px;
+}
+
+.post-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post h3, .post p, .post .category {
+    padding: 0 25px;
+    margin-top: 15px;
+}
+
+.category {
+    display: inline-block;
+    color: var(--primary);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+/* --- 3. COMENTARIOS Y AVATARES CSS  --- */
+.comments-section {
+    margin-top: 70px;
+    border-top: 1px solid #ddd;
+    padding-top: 30px;
+}
+
+.comment {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: rgba(42, 157, 143, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+/* El círculo del Avatar */
+.avatar-css {
+    width: 55px;
+    height: 55px;
+    background: var(--primary);
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Cabeza del Avatar con Pseudoelemento */
+.avatar-css::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 18px;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+}
+
+/* Cuerpo del Avatar con Pseudoelemento */
+.avatar-css::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    width: 35px;
+    height: 15px;
+    background: white;
+    border-radius: 20px 20px 0 0;
+}
+
+/* --- AJUSTES MODO OSCURO --- */
+body.dark-mode .post {
+    background: #1e1e1e;
+    color: white;
+}
+
+body.dark-mode .blog-filters label {
+    background: #333;
+    color: #ccc;
+}
+
+body.dark-mode .blog-filters input[type="radio"]:checked + label {
+    background: var(--primary);
+    color: white;
+}
